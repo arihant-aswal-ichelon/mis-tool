@@ -1,0 +1,100 @@
+@extends('layouts.page-app')
+
+@section("content")
+
+<?php
+    $youtube_data = $data['youtube_data']; 
+    $client_id = $data['client_id'];
+    $start_date = $data['start_date'];
+    $end_date = $data['end_date'];
+    $section = $data['section'];
+?>
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Channel Analytics</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="<?php echo route('home'); ?>">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="<?php echo url('/view-client/'.$client_id); ?>">Properties</a></li>
+                            <li class="breadcrumb-item active">Channel Analytics</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        @include('analysis.youtube.yt-filter')
+                    </div>
+                    <div class="card-body yt-video-data row">
+                        @include('analysis.youtube.yt-common')
+                        <?php if(!empty($youtube_data)){ ?>
+                            <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-nowrap align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Views</th>
+                                                <th scope="col">Estimated minutes watched</th>
+                                                <th scope="col">Average view duration</th>
+                                                <th scope="col">Comments</th>
+                                                <th scope="col">Likes</th>
+                                                <th scope="col">Dislikes</th>
+                                                <th scope="col">Shares</th>
+                                                <th scope="col">Subscribers Gained</th>
+                                                <th scope="col">Subscribers Lost</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Total</strong></td>
+                                            <?php if(isset($youtube_data['total']->rows) && !empty($youtube_data['total']->rows)){
+                                                    $video_total = $youtube_data['total']->rows[0];
+                                                    foreach($video_total as $key => $total){ if($key == 1 || $key == 2){$total = round($total / 60, 2); }?>
+                                                        <td><?php echo $total; ?></td>  
+                                            <?php } } ?>
+                                        </tr>
+                                        <tr>
+                                            <?php //echo "<pre/>"; var_dump($youtube_data);die; 
+                                                if(isset($youtube_data['statistics']->rows) && !empty($youtube_data['statistics']->rows)){
+                                                    $traffic_statistics = $youtube_data['statistics']->rows;
+                                                foreach($traffic_statistics as $ky => $count) { //echo "<pre/>"; var_dump($count);die; ?>
+                                                    <tr>
+                                                        <td><?php echo $count[0]; ?></td>
+                                                        <td><?php echo $count[1]; ?></td>
+                                                        <td><?php echo $count[2]; ?></td>
+                                                        <td><?php echo $count[3]; ?></td>
+                                                        <td><?php echo $count[4]; ?></td>
+                                                        <td><?php echo $count[5]; ?></td>
+                                                        <td><?php echo $count[6]; ?></td>
+                                                        <td><?php echo $count[7]; ?></td>
+                                                        <td><?php echo $count[8]; ?></td>
+                                                        <td><?php echo $count[9]; ?></td>
+                                                    </tr>
+                                                <?php } }?>  
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                        <?php } ?>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</div>
+
+<div>
+@endsection

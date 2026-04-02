@@ -1,0 +1,37 @@
+<hr/>
+
+<div class="col-sm-12 mb-15">
+    
+    <a class="btn btn-primary" href="<?php echo url('/present-client/youtube/'.$client_id); ?>">Overview</a>
+
+    <a class="btn btn-primary <?php if($section == "content"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "content", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Content</a>
+
+    <a class="btn btn-primary <?php if($section == "traffic"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "traffic", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Traffic source</a>
+
+    <a class="btn btn-primary <?php if($section == "geography"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "geography", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Geography</a>
+
+    <a class="btn btn-primary <?php if($section == "viewergender"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "viewergender", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Viewer gender</a>
+
+    <a class="btn btn-primary <?php if($section == "viewagegender"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "viewagegender", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Viewer age</a>
+
+    <a class="btn btn-primary <?php if($section == "playlist"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "playlist", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Playlist</a>
+
+    <a class="btn btn-primary <?php if($section == "date"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "date", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Date</a>
+
+    <a class="btn btn-primary <?php if($section == "topkeywords"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "topkeywords", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Top Keywords</a>
+    
+    <a class="btn btn-primary <?php if($section == "hashtags"){echo 'section-active';} ?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "hashtags", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Top Hashtags</a>
+
+    <a class="btn btn-primary <?php if($section == "playback_locations"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "playback_locations", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Playback Locations</a>
+
+    <a class="btn btn-primary <?php if($section == "sharing"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "sharing", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Social Sharing</a>
+
+    <a class="btn btn-primary <?php if($section == "video_wise"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "video_wise", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Video Wise Reports</a>
+
+    <a class="btn btn-primary <?php if($section == "tag_wise"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'viewCount', 'section' => "tag_wise", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Tag Wise Reports</a>
+
+    <a class="btn btn-primary <?php if($section == "flag_kpi"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "flag_kpi", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Flag KPI Reports</a>
+
+    <a class="btn btn-primary <?php if($section == "compare_wise"){echo 'section-active';}?>" href="<?php echo url('/youtube-details/'.$client_id.'/'.base64_encode(json_encode(array('start_date' => $start_date, 'end_date' => $end_date, 'maxresults' => isset($data['maxresults'])?$data['maxresults']:10, 'sort' => isset($data['sort'])?$data['sort']:'views', 'section' => "compare_wise", 'from_section' => isset($data['from_section'])?$data['from_section']:"")))); ?>">Comparison Reports</a>
+</div>
+<hr/>

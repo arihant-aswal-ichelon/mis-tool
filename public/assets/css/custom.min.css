@@ -1,0 +1,55 @@
+
+/*# sourceMappingURL=custom.min.css.map */
+
+.message_box {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+}
+a.see_more {
+    font-size: 17px;
+    font-weight: 700;
+}
+.mdi_icon{
+    font-size: 17px;
+}
+.dataTables_scrollBody{min-height: 200px;}
+.card-body.yt-video-data.row a.btn {
+    margin-bottom: 15px;
+}
+p.addtagclass {
+    display: block;
+    position: relative;
+}
+
+tr.video_tr {
+    position: relative;
+}
+
+tr.video_tr.activechannel {
+    background-color: #405189 !important;
+    color: #fff!important;
+}
+
+tr.video_tr .valid-tooltip, tr.video_tr .invalid-tooltip{
+    position: absolute;
+    z-index: 5;
+    display: none;
+    width: auto;
+    padding: 0.4rem 0.7rem;
+    margin-top: 0.1rem;
+    font-size: .7109375rem;
+    color: #fff;
+    background-color: var(--vz-success);
+    border-radius: var(--vz-border-radius);
+    left: 35px;
+    top: 0;
+}
+
+div#last_video_date_box.error{
+    background: #D22B2B;
+}
+
+div#last_video_date_box.error h2#last_video_date, div#last_video_date_box.error p {
+    color: #fff !important;
+}
