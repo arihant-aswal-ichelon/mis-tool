@@ -679,19 +679,31 @@ class InstagramHelper{
         }
         return $category;
     }
-    
-    public static function InstagramOrganicViews($igUserId, $since, $until, $accessToken) {
+
+     public static function InstagramOrganicViews($igUserId, $since, $until, $accessToken) {
 
         // Step 1: Get media IDs within date range
         $mediaUrl = "https://graph.facebook.com/$igUserId/media?" . http_build_query([
-            'fields' => 'id,timestamp',
-            'since' => strtotime($since),
-            'until' => strtotime($until),
+            'fields'       => 'id,timestamp',
+            'since'        => strtotime($since),
+            'until'        => strtotime($until) + 86399, 
             'access_token' => $accessToken
         ]);
 
-        $mediaResponse = json_decode(file_get_contents($mediaUrl), true);
+        $ch = curl_init($mediaUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+        ]);
+        $mediaRaw  = curl_exec($ch);
+        $httpCode  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
+        if ($httpCode !== 200) {
+            throw new \Exception("Instagram media fetch failed (HTTP $httpCode): $mediaRaw");
+        }
+
+        $mediaResponse = json_decode($mediaRaw, true);
         // Step 2: Prepare batch request for insights
         $batchPayload = [];
         foreach ($mediaResponse['data'] as $post) {
@@ -741,6 +753,68 @@ class InstagramHelper{
         
         return array_sum($organicViews);
     }
+    
+    // public static function InstagramOrganicViews($igUserId, $since, $until, $accessToken) {
+
+    //     // Step 1: Get media IDs within date range
+    //     $mediaUrl = "https://graph.facebook.com/$igUserId/media?" . http_build_query([
+    //         'fields' => 'id,timestamp',
+    //         'since' => strtotime($since),
+    //         'until' => strtotime($until),
+    //         'access_token' => $accessToken
+    //     ]);
+
+    //     $mediaResponse = json_decode(file_get_contents($mediaUrl), true);
+
+    //     // Step 2: Prepare batch request for insights
+    //     $batchPayload = [];
+    //     foreach ($mediaResponse['data'] as $post) {
+    //         $batchPayload[] = [
+    //             'method' => 'GET',
+    //             'name' => $post['id'],
+    //             'relative_url' => "{$post['id']}/insights?metric=views"
+    //         ];
+    //     }
+
+    //     // Step 3: Execute batch request
+    //     $data = [
+    //         'access_token' => $accessToken,
+    //         'batch' => json_encode($batchPayload)
+    //     ];
+
+    //     $ch = curl_init();
+    //     curl_setopt_array($ch, [
+    //         CURLOPT_URL => "https://graph.facebook.com/",
+    //         CURLOPT_POST => true,
+    //         CURLOPT_POSTFIELDS => http_build_query($data),
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded']
+    //     ]);
+
+    //     $response = curl_exec($ch);
+    //     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    //     if (curl_errno($ch)) {
+    //         die('cURL error: ' . curl_error($ch));
+    //     }
+
+    //     curl_close($ch);
+
+    //     // Step 4: Process results
+    //     $organicViews = [];
+    //     $responseData = json_decode($response, true);
+        
+    //     foreach ($responseData as $item) {
+    //         if ($item['code'] == 200) {
+    //             $insight = json_decode($item['body'], true);
+    //             $views = $insight['data'][0]['values'][0]['value'] ?? 0;
+                
+    //             $organicViews[] = $views;
+    //         }
+    //     }
+        
+    //     return array_sum($organicViews);
+    // }
 
 }
 ?>
